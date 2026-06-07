@@ -51,7 +51,7 @@ html, body {
     top: 22%;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.75);
     color: white;
     padding: 14px 20px;
     border-radius: 14px;
@@ -107,7 +107,7 @@ html, body {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     z-index: 2000;
     justify-content: center;
     align-items: center;
@@ -154,66 +154,69 @@ html, body {
           sourceType: webcam;
           debugUIEnabled: false;">
 
+    <a-assets>
+        <a-asset-item id="squirrel"
+            src="Lowpoly Squirrel.glb">
+        </a-asset-item>
+    </a-assets>
+
     <a-marker preset="hiro" id="marker1">
 
-        <!-- Eichhörnchen 1 -->
-        <a-entity position="-1.2 0 0">
-            <a-sphere position="0 0.5 0" radius="0.25" color="#c0720c"></a-sphere>
-            <a-sphere position="0 0.9 0" radius="0.16" color="#c0720c"></a-sphere>
-            <a-torus position="0.25 0.65 0"
-                     radius="0.25"
-                     radius-tubular="0.05"
-                     arc="180"
-                     color="#8b5a2b"
-                     rotation="0 90 -60"></a-torus>
+        <!-- 1 -->
+        <a-entity position="-0.9 0 -0.8" rotation="0 15 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
         </a-entity>
 
-        <!-- Eichhörnchen 2 -->
-        <a-entity position="-0.6 0 -0.4">
-            <a-sphere position="0 0.5 0" radius="0.25" color="#c0720c"></a-sphere>
-            <a-sphere position="0 0.9 0" radius="0.16" color="#c0720c"></a-sphere>
-            <a-torus position="0.25 0.65 0"
-                     radius="0.25"
-                     radius-tubular="0.05"
-                     arc="180"
-                     color="#8b5a2b"
-                     rotation="0 90 -60"></a-torus>
+        <!-- 2 -->
+        <a-entity position="-0.3 0 -0.8" rotation="0 -10 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
         </a-entity>
 
-        <!-- Eichhörnchen 3 -->
-        <a-entity position="0 0 0">
-            <a-sphere position="0 0.5 0" radius="0.25" color="#c0720c"></a-sphere>
-            <a-sphere position="0 0.9 0" radius="0.16" color="#c0720c"></a-sphere>
-            <a-torus position="0.25 0.65 0"
-                     radius="0.25"
-                     radius-tubular="0.05"
-                     arc="180"
-                     color="#8b5a2b"
-                     rotation="0 90 -60"></a-torus>
+        <!-- 3 -->
+        <a-entity position="0.3 0 -0.8" rotation="0 20 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
         </a-entity>
 
-        <!-- Eichhörnchen 4 -->
-        <a-entity position="0.6 0 -0.4">
-            <a-sphere position="0 0.5 0" radius="0.25" color="#c0720c"></a-sphere>
-            <a-sphere position="0 0.9 0" radius="0.16" color="#c0720c"></a-sphere>
-            <a-torus position="0.25 0.65 0"
-                     radius="0.25"
-                     radius-tubular="0.05"
-                     arc="180"
-                     color="#8b5a2b"
-                     rotation="0 90 -60"></a-torus>
+        <!-- 4 -->
+        <a-entity position="0.9 0 -0.8" rotation="0 -20 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
         </a-entity>
 
-        <!-- Eichhörnchen 5 -->
-        <a-entity position="1.2 0 0">
-            <a-sphere position="0 0.5 0" radius="0.25" color="#c0720c"></a-sphere>
-            <a-sphere position="0 0.9 0" radius="0.16" color="#c0720c"></a-sphere>
-            <a-torus position="0.25 0.65 0"
-                     radius="0.25"
-                     radius-tubular="0.05"
-                     arc="180"
-                     color="#8b5a2b"
-                     rotation="0 90 -60"></a-torus>
+        <!-- 5 -->
+        <a-entity position="-1.2 0 0" rotation="0 30 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
+        </a-entity>
+
+        <!-- 6 -->
+        <a-entity position="-0.4 0 0" rotation="0 -15 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
+        </a-entity>
+
+        <!-- 7 -->
+        <a-entity position="0.4 0 0" rotation="0 10 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
+        </a-entity>
+
+        <!-- 8 -->
+        <a-entity position="1.2 0 0" rotation="0 -30 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+        </a-entity>
+
+        <!-- 9 -->
+        <a-entity position="-0.5 0 0.8" rotation="0 25 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
+        </a-entity>
+
+        <!-- 10 -->
+        <a-entity position="0.5 0 0.8" rotation="0 -25 0">
+            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
         </a-entity>
 
     </a-marker>
@@ -229,21 +232,23 @@ html, body {
 <div id="ui-overlay">
     <div id="header">
         <h1>🌳 Posten 1 – Der Baum</h1>
-        <p>Finde alle Eichhörnchen</p>
+        <p>Finde die Eichhörnchen mit den Nüssen</p>
     </div>
 </div>
 
 <div id="raetsel-box">
     <h2>🐿️ Rätsel</h2>
+
     <p>
-        Wie viele Eichhörnchen kannst du entdecken?
+        Schaue ganz genau hin!<br>
+        Wie viele Eichhörnchen tragen eine Nuss?
     </p>
 
     <div class="answer-grid">
-        <button class="answer-btn" onclick="checkAnswer(this,false)">3</button>
-        <button class="answer-btn" onclick="checkAnswer(this,false)">4</button>
-        <button class="answer-btn" onclick="checkAnswer(this,true)">5</button>
+        <button class="answer-btn" onclick="checkAnswer(this,false)">5</button>
         <button class="answer-btn" onclick="checkAnswer(this,false)">6</button>
+        <button class="answer-btn" onclick="checkAnswer(this,true)">7</button>
+        <button class="answer-btn" onclick="checkAnswer(this,false)">8</button>
     </div>
 </div>
 
@@ -251,8 +256,8 @@ html, body {
     <div class="emoji" id="feedback-emoji">🎉</div>
     <h2 id="feedback-title">Richtig!</h2>
     <p id="feedback-text">
-        Super! Du hast alle Eichhörnchen gefunden.
-        Suche nun den nächsten Marker beim grossen Stein.
+        Richtig! 7 Eichhörnchen tragen eine Nuss.
+        Suche nun den nächsten Hinweis beim grossen Stein.
     </p>
     <button onclick="hideFeedback()">Weiter</button>
 </div>
@@ -261,12 +266,17 @@ html, body {
 const marker = document.querySelector('#marker1');
 const hint = document.querySelector('#marker-hint');
 
+let markerAlreadyFound = false;
+
 marker.addEventListener('markerFound', () => {
+    markerAlreadyFound = true;
     hint.style.display = 'none';
 });
 
 marker.addEventListener('markerLost', () => {
-    hint.style.display = 'block';
+    if (!markerAlreadyFound) {
+        hint.style.display = 'block';
+    }
 });
 
 function checkAnswer(btn, correct) {
@@ -274,13 +284,8 @@ function checkAnswer(btn, correct) {
     const feedback = document.getElementById('feedback');
 
     if (correct) {
-        document.getElementById('feedback-emoji').textContent = '🎉';
-        document.getElementById('feedback-title').textContent = 'Richtig!';
-        document.getElementById('feedback-text').textContent =
-            'Super! Du hast alle 5 Eichhörnchen gefunden. Suche nun den nächsten Marker beim grossen Stein.';
         feedback.classList.add('show');
-    }
-    else {
+    } else {
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 800);
     }
