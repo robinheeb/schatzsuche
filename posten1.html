@@ -154,70 +154,89 @@ html, body {
           sourceType: webcam;
           debugUIEnabled: false;">
 
-    <a-assets>
-        <a-asset-item id="squirrel"
-            src="Squirrel.glb">
-        </a-asset-item>
-    </a-assets>
+<a-assets>
+    <a-asset-item id="squirrel"
+        src="Squirrel.glb">
+    </a-asset-item>
+</a-assets>
 
-    <a-marker preset="hiro" id="marker1">
+       <a-marker preset="hiro" id="marker1">
 
-        <!-- 1 -->
-        <a-entity position="-0.9 0 -0.8" rotation="0 15 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <!-- Reihe hinten -->
 
-        <!-- 2 -->
-        <a-entity position="-0.3 0 -0.8" rotation="0 -10 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <a-entity position="-0.8 0 -0.7">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 160 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 3 -->
-        <a-entity position="0.3 0 -0.8" rotation="0 20 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <a-entity position="-0.25 0 -0.7">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 195 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 4 -->
-        <a-entity position="0.9 0 -0.8" rotation="0 -20 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <a-entity position="0.25 0 -0.7">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 145 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 5 -->
-        <a-entity position="-1.2 0 0" rotation="0 30 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <a-entity position="0.8 0 -0.7">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 220 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 6 -->
-        <a-entity position="-0.4 0 0" rotation="0 -15 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <!-- Reihe Mitte -->
 
-        <!-- 7 -->
-        <a-entity position="0.4 0 0" rotation="0 10 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-            <a-sphere position="0.12 0.12 0.10" radius="0.03" color="#8B4513"></a-sphere>
-        </a-entity>
+    <a-entity position="-1.0 0 0">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 180 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 8 -->
-        <a-entity position="1.2 0 0" rotation="0 -30 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-        </a-entity>
+    <a-entity position="-0.35 0 0">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 135 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 9 -->
-        <a-entity position="-0.5 0 0.8" rotation="0 25 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-        </a-entity>
+    <a-entity position="0.35 0 0">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 210 0">
+        </a-gltf-model>
+    </a-entity>
 
-        <!-- 10 -->
-        <a-entity position="0.5 0 0.8" rotation="0 -25 0">
-            <a-gltf-model src="#squirrel" scale="0.25 0.25 0.25"></a-gltf-model>
-        </a-entity>
+    <a-entity position="1.0 0 0">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 150 0">
+        </a-gltf-model>
+    </a-entity>
+
+    <!-- Reihe vorne -->
+
+    <a-entity position="-0.45 0 0.7">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 170 0">
+        </a-gltf-model>
+    </a-entity>
+
+    <a-entity position="0.45 0 0.7">
+        <a-gltf-model src="#squirrel"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 200 0">
+        </a-gltf-model>
+    </a-entity>
 
     </a-marker>
 
