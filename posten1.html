@@ -128,6 +128,12 @@
     vr-mode-ui="enabled: false"
     renderer="logarithmicDepthBuffer: true;"
   >
+    <a-assets>
+  <a-asset-item
+      id="robotoFont"
+      src="https://cdn.aframe.io/fonts/Roboto-msdf.json">
+  </a-asset-item>
+</a-assets>
     <!-- HIRO Marker: Eichhörnchen (3D-Figur aus einfachen Formen) -->
     <a-marker preset="hiro" id="marker1">
 
@@ -158,6 +164,7 @@
 
       <!-- Rätseltext schwebt über der Szene -->
       <a-text
+        font="#robotoFont"
         value="Wie viele Eichhörnchen\nsiehst du hier?"
         position="0 1.8 0"
         align="center"
