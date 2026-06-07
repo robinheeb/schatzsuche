@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦋 Posten 3 – Die Wiese</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; font-family: 'Arial Rounded MT Bold', Arial, sans-serif; }
+    #ui-overlay { position: fixed; top: 0; left: 0; right: 0; z-index: 999; pointer-events: none; }
+    #header {
+      background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+      color: white; text-align: center; padding: 12px 16px;
+      pointer-events: all; box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    }
+    #header h1 { margin: 0; font-size: 1.1em; }
+    #header p  { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; }
+    #raetsel-box {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+      border-top: 4px solid #6a1b9a;
+      padding: 16px 20px 24px; pointer-events: all;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+    }
+    #raetsel-box h2 { margin: 0 0 10px; font-size: 1em; color: #4a148c; }
+    #raetsel-box p  { margin: 0 0 14px; font-size: 1.05em; color: #311b92; line-height: 1.4; }
+    .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .answer-btn {
+      background: #8e24aa; color: white; border: none; border-radius: 14px;
+      padding: 14px 10px; font-size: 1.1em; font-weight: bold; cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.1s;
+    }
+    .answer-btn:active { transform: scale(0.95); }
+    .answer-btn.wrong  { background: #ef5350; }
+    #feedback {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      z-index: 1000; justify-content: center; align-items: center;
+      flex-direction: column; text-align: center; padding: 30px;
+    }
+    #feedback.show { display: flex; }
+    #feedback .emoji { font-size: 5em; margin-bottom: 16px; }
+    #feedback h2 { color: white; font-size: 1.6em; margin: 0 0 10px; }
+    #feedback p  { color: #eee; font-size: 1em; margin: 0 0 24px; }
+    #feedback button {
+      background: #8e24aa; color: white; border: none; border-radius: 14px;
+      padding: 14px 30px; font-size: 1.1em; font-weight: bold; cursor: pointer;
+    }
+    #marker-hint {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.6); color: white; border-radius: 16px;
+      padding: 16px 24px; text-align: center; font-size: 0.9em;
+      pointer-events: none; z-index: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <a-scene
+    embedded
+    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    vr-mode-ui="enabled: false"
+    renderer="logarithmicDepthBuffer: true;"
+  >
+    <!-- Barcode Marker 0: Schmetterlinge -->
+    <a-marker type="barcode" value="0" id="marker3">
+
+      <!-- Blumenwiese -->
+      <a-cylinder position="-0.5 0.05 0.2" radius="0.08" height="0.3" color="#66bb6a"></a-cylinder>
+      <a-sphere position="-0.5 0.22 0.2" radius="0.1" color="#ef5350"></a-sphere>
+      <a-cylinder position="0 0.05 0.4" radius="0.06" height="0.25" color="#81c784"></a-cylinder>
+      <a-sphere position="0 0.19 0.4" radius="0.09" color="#ffee58"></a-sphere>
+      <a-cylinder position="0.5 0.05 0.1" radius="0.07" height="0.28" color="#4caf50"></a-cylinder>
+      <a-sphere position="0.5 0.21 0.1" radius="0.1" color="#ec407a"></a-sphere>
+
+      <!-- Schmetterling 1 (flatternd) -->
+      <a-entity position="-0.3 0.7 0"
+        animation="property: position; from: -0.3 0.7 0; to: -0.3 1.0 0; dur: 1200; dir: alternate; loop: true; easing: easeInOutSine">
+        <a-torus position="-0.18 0 0" radius="0.18" radius-tubular="0.08" arc="180" color="#ff9800" rotation="0 0 -30"
+          animation="property: rotation; from: 0 0 -30; to: 0 0 30; dur: 400; dir: alternate; loop: true"></a-torus>
+        <a-torus position="0.18 0 0" radius="0.18" radius-tubular="0.08" arc="180" color="#ff9800" rotation="0 0 210"
+          animation="property: rotation; from: 0 0 210; to: 0 0 150; dur: 400; dir: alternate; loop: true"></a-torus>
+        <a-sphere position="0 0 0" radius="0.05" color="#4e342e"></a-sphere>
+      </a-entity>
+
+      <!-- Schmetterling 2 -->
+      <a-entity position="0.35 0.9 -0.1"
+        animation="property: position; from: 0.35 0.9 -0.1; to: 0.35 1.2 -0.1; dur: 900; dir: alternate; loop: true; easing: easeInOutSine">
+        <a-torus position="-0.16 0 0" radius="0.16" radius-tubular="0.07" arc="180" color="#7e57c2" rotation="0 0 -25"
+          animation="property: rotation; from: 0 0 -25; to: 0 0 25; dur: 350; dir: alternate; loop: true"></a-torus>
+        <a-torus position="0.16 0 0" radius="0.16" radius-tubular="0.07" arc="180" color="#7e57c2" rotation="0 0 205"
+          animation="property: rotation; from: 0 0 205; to: 0 0 155; dur: 350; dir: alternate; loop: true"></a-torus>
+        <a-sphere position="0 0 0" radius="0.045" color="#4e342e"></a-sphere>
+      </a-entity>
+
+      <!-- Schmetterling 3 -->
+      <a-entity position="0 0.6 0.3"
+        animation="property: position; from: 0 0.6 0.3; to: 0 0.95 0.3; dur: 1400; dir: alternate; loop: true; easing: easeInOutSine">
+        <a-torus position="-0.15 0 0" radius="0.15" radius-tubular="0.065" arc="180" color="#26c6da" rotation="0 0 -28"
+          animation="property: rotation; from: 0 0 -28; to: 0 0 28; dur: 380; dir: alternate; loop: true"></a-torus>
+        <a-torus position="0.15 0 0" radius="0.15" radius-tubular="0.065" arc="180" color="#26c6da" rotation="0 0 208"
+          animation="property: rotation; from: 0 0 208; to: 0 0 152; dur: 380; dir: alternate; loop: true"></a-torus>
+        <a-sphere position="0 0 0" radius="0.042" color="#4e342e"></a-sphere>
+      </a-entity>
+
+      <!-- Schmetterling 4 (klein, versteckt im Hintergrund) -->
+      <a-entity position="-0.6 1.1 -0.2"
+        animation="property: position; from: -0.6 1.1 -0.2; to: -0.6 1.35 -0.2; dur: 1600; dir: alternate; loop: true">
+        <a-torus position="-0.1 0 0" radius="0.1" radius-tubular="0.045" arc="180" color="#ef9a9a" rotation="0 0 -20"
+          animation="property: rotation; from: 0 0 -20; to: 0 0 20; dur: 320; dir: alternate; loop: true"></a-torus>
+        <a-torus position="0.1 0 0" radius="0.1" radius-tubular="0.045" arc="180" color="#ef9a9a" rotation="0 0 200"
+          animation="property: rotation; from: 0 0 200; to: 0 0 160; dur: 320; dir: alternate; loop: true"></a-torus>
+        <a-sphere position="0 0 0" radius="0.03" color="#4e342e"></a-sphere>
+      </a-entity>
+
+      <!-- Schwebender Text -->
+      <a-text
+        value="Wie viele Schmetterlinge\nflattern hier?"
+        position="0 1.8 0" align="center" color="#f3e5f5" width="3"
+        animation="property: position; to: 0 2.1 0; dur: 1500; dir: alternate; loop: true; easing: easeInOutSine"
+      ></a-text>
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <div id="marker-hint">📋 Halte die Kamera auf<br><strong>Marker 3 (Barcode 0)</strong></div>
+
+  <div id="ui-overlay">
+    <div id="header">
+      <h1>🦋 Posten 3 – Die Wiese</h1>
+      <p>Schau durch die Kamera auf den Marker!</p>
+    </div>
+  </div>
+
+  <div id="raetsel-box">
+    <h2>🦋 Rätsel:</h2>
+    <p>Zähle alle flatternden Schmetterlinge!<br>Manche sind klein und ein bisschen versteckt…</p>
+    <div class="answer-grid">
+      <button class="answer-btn" onclick="checkAnswer(this, false)">2 Schmetterlinge</button>
+      <button class="answer-btn" onclick="checkAnswer(this, false)">3 Schmetterlinge</button>
+      <button class="answer-btn" onclick="checkAnswer(this, true)">4 Schmetterlinge</button>
+      <button class="answer-btn" onclick="checkAnswer(this, false)">5 Schmetterlinge</button>
+    </div>
+  </div>
+
+  <div id="feedback">
+    <div class="emoji" id="feedback-emoji">🎉</div>
+    <h2 id="feedback-title">Richtig!</h2>
+    <p id="feedback-text">Super gemacht!</p>
+    <button onclick="hideFeedback()">Weiter ➡️</button>
+  </div>
+
+  <script>
+    const marker = document.querySelector('#marker3');
+    const hint = document.querySelector('#marker-hint');
+    marker.addEventListener('markerFound', () => hint.style.display = 'none');
+    marker.addEventListener('markerLost', () => hint.style.display = 'block');
+
+    function checkAnswer(btn, correct) {
+      const feedback = document.getElementById('feedback');
+      if (correct) {
+        document.getElementById('feedback-emoji').textContent = '🦋';
+        document.getElementById('feedback-title').textContent = 'Wunderbar!';
+        document.getElementById('feedback-text').textContent =
+          '4 Schmetterlinge – auch den kleinen rosa habt ihr entdeckt! Ihr seid echte Detektive!\n\nHinweis für Posten 4: Sucht den letzten Marker beim Eingang!';
+        feedback.style.background = 'rgba(74,20,140,0.85)';
+      } else {
+        document.getElementById('feedback-emoji').textContent = '🔍';
+        document.getElementById('feedback-title').textContent = 'Fast! Nochmal schauen!';
+        document.getElementById('feedback-text').textContent = 'Schaut genau – manche Schmetterlinge sind sehr klein!';
+        feedback.style.background = 'rgba(183,28,28,0.85)';
+        btn.classList.add('wrong');
+        setTimeout(() => btn.classList.remove('wrong'), 800);
+        return;
+      }
+      feedback.classList.add('show');
+    }
+
+    function hideFeedback() { document.getElementById('feedback').classList.remove('show'); }
+  </script>
+</body>
+</html>
