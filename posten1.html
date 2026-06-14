@@ -287,16 +287,12 @@ html, body {
 const marker = document.querySelector('#marker1');
 const hint = document.querySelector('#marker-hint');
 
-let markerAlreadyFound = false;
+
 
 marker.addEventListener("targetFound", () => {
     hint.style.display = "none";
 });
-
-marker.addEventListener("targetLost", () => {
-    console.log("Target verloren");
-});
-
+      
 function checkAnswer(btn, correct) {
 
     const feedback = document.getElementById('feedback');
