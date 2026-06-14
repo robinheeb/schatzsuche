@@ -157,89 +157,101 @@ html, body {
         src="Squirrel.glb">
     </a-asset-item>
 </a-assets>
+<a-light type="ambient" intensity="1"></a-light>
+<a-light type="directional" intensity="1.2" position="0 2 1"></a-light>
 <a-entity id="marker1" mindar-image-target="targetIndex: 0">
 
-<!-- 1 - weit links vorne -->
-<a-entity position="0 0 0">
+    <!-- Eichhörnchen 1 -->
+    <a-entity position="0 0 0">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 35 0">
+        </a-gltf-model>
+    </a-entity>
 
-    <a-gltf-model src="#squirrel"
-                  scale="0.03 0.03 0.03"
-                  rotation="0 35 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 2 -->
+    <a-entity position="-1.2 0 -0.8">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 120 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 2 - links mittig -->
-<a-entity position="-5 0 3">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 120 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 3 -->
+    <a-entity position="1.5 0 -1.0">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 220 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 3 - links hinten -->
-<a-entity position="-2 0 -7">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 220 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 4 -->
+    <a-entity position="-2.0 0 0.5">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 180 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 4 - nahe Mitte -->
-<a-entity position="1.5 0 -2">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 180 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 5 -->
+    <a-entity position="2.2 0 0.8">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 310 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 5 - rechts -->
-<a-entity position="7 0 4">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 310 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 6 -->
+    <a-entity position="-1.0 0 1.8">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 90 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 6 - links hinten weit -->
-<a-entity position="-7 0 7">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 90 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 7 -->
+    <a-entity position="1.3 0 2.0">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 270 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 7 - hinten -->
-<a-entity position="2 0 8">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 270 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 8 -->
+    <a-entity position="0.5 0 -2.2">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 45 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 8 - rechts vorne -->
-<a-entity position="8 0 -6">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 45 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 9 -->
+    <a-entity position="-2.3 0 -1.5">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 150 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 9 - relativ nah -->
-<a-entity position="-3 0 -1">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 150 0">
-    </a-gltf-model>
-</a-entity>
+    <!-- Eichhörnchen 10 -->
+    <a-entity position="2.5 0 -1.8">
+        <a-gltf-model
+            src="#squirrel"
+            scale="0.03 0.03 0.03"
+            rotation="0 340 0">
+        </a-gltf-model>
+    </a-entity>
 
-<!-- 10 - rechts hinten -->
-<a-entity position="5 0 6">
-    <a-gltf-model src="#squirrel"
-                  scale="0.003 0.003 0.003"
-                  rotation="0 340 0">
-    </a-gltf-model>
 </a-entity>
-      </a-entity>
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
 </a-scene>
