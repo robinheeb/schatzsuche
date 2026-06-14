@@ -296,7 +296,10 @@ marker.addEventListener('markerFound', () => {
 });
 
 marker.addEventListener('markerLost', () => {
-    if (!markerAlreadyFound) {
+
+    // Marker wurde bereits einmal erkannt
+    // Hinweis nicht mehr anzeigen
+    if (!markerLocked) {
         hint.style.display = 'block';
     }
 });
