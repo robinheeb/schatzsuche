@@ -146,7 +146,7 @@ html, body {
 <body>
 
 <a-scene
-    mindar-image="imageTargetSrc: eichhoernchenTarget.mind;"
+    mindar-image="imageTargetSrc: eichhoernchenTarget.mind; uiScanning: false;"
     color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights"
     vr-mode-ui="enabled: false"
@@ -294,9 +294,23 @@ function checkAnswer() {
     );
 
     const feedback = document.getElementById('feedback');
+if (isNaN(value)) {
+
+    document.getElementById('feedback-emoji').textContent = '🤔';
+
+    document.getElementById('feedback-title').textContent =
+        'Keine Zahl eingegeben';
+
+    document.getElementById('feedback-text').textContent =
+        'Gib zuerst eine Zahl ein.';
+
+    feedback.classList.add('show');
+    return;
+}
 
     if (value === 7) {
 
+        document.getElementById('answerInput').disabled = true;
         document.getElementById('feedback-emoji').textContent = '🎉';
 
         document.getElementById('feedback-title').textContent =
