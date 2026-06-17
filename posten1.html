@@ -246,21 +246,33 @@ html, body {
         Wie viele Eichhörnchen sitzen auf dem Baum?
     </p>
 
-    <div class="answer-grid">
-        <button class="answer-btn" onclick="checkAnswer(this,false)">5</button>
-        <button class="answer-btn" onclick="checkAnswer(this,false)">6</button>
-        <button class="answer-btn" onclick="checkAnswer(this,true)">7</button>
-        <button class="answer-btn" onclick="checkAnswer(this,false)">8</button>
-    </div>
+<div style="display:flex; gap:10px;">
+    <input
+        id="answerInput"
+        type="number"
+        min="0"
+        max="20"
+        placeholder="Anzahl eingeben"
+        style="
+            flex:1;
+            padding:12px;
+            font-size:1rem;
+            border-radius:12px;
+            border:2px solid #ccc;
+        ">
+        
+    <button
+        class="answer-btn"
+        onclick="checkAnswer()">
+        OK
+    </button>
+</div>
 </div>
 
 <div id="feedback">
     <div class="emoji" id="feedback-emoji">🎉</div>
     <h2 id="feedback-title">Richtig!</h2>
-    <p id="feedback-text">
-        Richtig! 7 Eichhörnchen sitzen auf dem Baum.
-        Suche nun den nächsten Hinweis beim grossen Stein.
-    </p>
+    <p id="feedback-text"></p>
     <button onclick="hideFeedback()">Weiter</button>
 </div>
 
@@ -271,24 +283,54 @@ const hint = document.querySelector('#marker-hint');
 
 
 marker.addEventListener("targetFound", () => {
-    hint.style.display = "none";
-});
+    hint.remove();
+}, { once: true });
       
-function checkAnswer(btn, correct) {
+function checkAnswer() {
+
+    const value = parseInt(
+        document.getElementById('answerInput').value,
+        10
+    );
 
     const feedback = document.getElementById('feedback');
 
-    if (correct) {
+    if (value === 7) {
+
+        document.getElementById('feedback-emoji').textContent = '🎉';
+
+        document.getElementById('feedback-title').textContent =
+            'Richtig!';
+
+        document.getElementById('feedback-text').textContent =
+            'Super! Du hast alle Eichhörnchen gezählt. Schaue mal ganz unten beim Stamm, ob du ein Schatz findest.';
+
         feedback.classList.add('show');
-    } else {
-        btn.classList.add('wrong');
-        setTimeout(() => btn.classList.remove('wrong'), 800);
+    }
+    else {
+
+        document.getElementById('feedback-emoji').textContent = '🤔';
+
+        document.getElementById('feedback-title').textContent =
+            'Leider nicht ganz richtig';
+
+        document.getElementById('feedback-text').textContent =
+              'Zähle die Eichhörnchen auf dem Baum nochmals ganz genau.';
+        feedback.classList.add('show');
     }
 }
-
+      
 function hideFeedback() {
     document.getElementById('feedback').classList.remove('show');
 }
+ document
+    .getElementById('answerInput')
+    .addEventListener('keydown', function (event) {
+
+        if (event.key === 'Enter') {
+            checkAnswer();
+        }
+    });
 </script>
 
 </body>
