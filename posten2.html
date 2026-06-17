@@ -1,164 +1,326 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐸 Posten 2 – Der Teich</title>
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; font-family: 'Arial Rounded MT Bold', Arial, sans-serif; }
-    #ui-overlay { position: fixed; top: 0; left: 0; right: 0; z-index: 999; pointer-events: none; }
-    #header {
-      background: linear-gradient(135deg, #0277bd, #0288d1);
-      color: white; text-align: center; padding: 12px 16px;
-      pointer-events: all; box-shadow: 0 3px 12px rgba(0,0,0,0.3);
-    }
-    #header h1 { margin: 0; font-size: 1.1em; }
-    #header p  { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; }
-    #raetsel-box {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-      border-top: 4px solid #0277bd;
-      padding: 16px 20px 24px; pointer-events: all;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-    }
-    #raetsel-box h2 { margin: 0 0 10px; font-size: 1em; color: #01579b; }
-    #raetsel-box p  { margin: 0 0 14px; font-size: 1.05em; color: #0d47a1; line-height: 1.4; }
-    .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .answer-btn {
-      background: #0288d1; color: white; border: none; border-radius: 14px;
-      padding: 14px 10px; font-size: 1.1em; font-weight: bold; cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.1s;
-    }
-    .answer-btn:active { transform: scale(0.95); }
-    .answer-btn.wrong { background: #ef5350; }
-    #feedback {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-      z-index: 1000; justify-content: center; align-items: center;
-      flex-direction: column; text-align: center; padding: 30px;
-    }
-    #feedback.show { display: flex; }
-    #feedback .emoji { font-size: 5em; margin-bottom: 16px; }
-    #feedback h2 { color: white; font-size: 1.6em; margin: 0 0 10px; }
-    #feedback p  { color: #eee; font-size: 1em; margin: 0 0 24px; }
-    #feedback button {
-      background: #0288d1; color: white; border: none; border-radius: 14px;
-      padding: 14px 30px; font-size: 1.1em; font-weight: bold; cursor: pointer;
-    }
-    #marker-hint {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.6); color: white; border-radius: 16px;
-      padding: 16px 24px; text-align: center; font-size: 0.9em;
-      pointer-events: none; z-index: 500;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>🌊 Posten 2 – Der See</title>
+
+<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    pointer-events: none;
+}
+
+#header {
+    background: linear-gradient(135deg,#1565c0,#42a5f5);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    pointer-events: all;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+#header h1 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+#header p {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+}
+
+#marker-hint {
+    position: fixed;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 14px;
+    text-align: center;
+    z-index: 500;
+}
+
+#raetsel-box {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,#e3f2fd,#bbdefb);
+    border-top: 4px solid #1e88e5;
+    padding: 14px;
+    z-index: 999;
+    max-height: 38vh;
+    overflow-y: auto;
+}
+
+#raetsel-box h2 {
+    margin: 0 0 10px;
+    color: #0d47a1;
+}
+
+#raetsel-box p {
+    margin: 0 0 14px;
+    line-height: 1.4;
+}
+
+.answer-btn {
+    background: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#feedback {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+}
+
+#feedback.show {
+    display: flex;
+}
+
+#feedback .emoji {
+    font-size: 5rem;
+}
+
+#feedback h2,
+#feedback p {
+    color: white;
+}
+
+#feedback button {
+    background: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 1rem;
+}
+</style>
 </head>
+
 <body>
 
-  <a-scene
-    embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+<a-scene
+    mindar-image="imageTargetSrc: goldfishtarget.mind; uiScanning: false;"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
     vr-mode-ui="enabled: false"
-    renderer="logarithmicDepthBuffer: true;"
-  >
-    <!-- KANJI Marker: Frösche -->
-    <a-marker preset="kanji" id="marker2">
+    xr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
 
-      <!-- Wasser-Fläche -->
-      <a-circle position="0 0.01 0" radius="0.8" color="#29b6f6" opacity="0.7"
-        rotation="-90 0 0"></a-circle>
+<a-assets>
+    <a-asset-item id="goldfish" src="goldfish.glb"></a-asset-item>
+    <a-asset-item id="bluefish" src="bluegoldfish.glb"></a-asset-item>
+</a-assets>
 
-      <!-- Frosch 1 (links) -->
-      <a-sphere position="-0.4 0.15 0" radius="0.18" color="#66bb6a"></a-sphere>
-      <a-sphere position="-0.4 0.35 0" radius="0.13" color="#66bb6a"></a-sphere>
-      <a-sphere position="-0.47 0.42 0.08" radius="0.04" color="black"></a-sphere>
-      <a-sphere position="-0.33 0.42 0.08" radius="0.04" color="black"></a-sphere>
+<a-light type="ambient" intensity="1"></a-light>
+<a-light type="directional" intensity="1.2" position="0 2 1"></a-light>
 
-      <!-- Frosch 2 (rechts) -->
-      <a-sphere position="0.4 0.15 0" radius="0.18" color="#43a047"></a-sphere>
-      <a-sphere position="0.4 0.35 0" radius="0.13" color="#43a047"></a-sphere>
-      <a-sphere position="0.33 0.42 0.08" radius="0.04" color="black"></a-sphere>
-      <a-sphere position="0.47 0.42 0.08" radius="0.04" color="black"></a-sphere>
+<a-entity id="marker1" mindar-image-target="targetIndex: 0">
 
-      <!-- Frosch 3 (mitte, hüpfend) -->
-      <a-sphere position="0 0.3 0" radius="0.2" color="#81c784"
-        animation="property: position; from: 0 0.3 0; to: 0 0.7 0; dur: 800; dir: alternate; loop: true; easing: easeOutBounce">
-      </a-sphere>
-      <a-sphere position="0 0.52 0" radius="0.14" color="#81c784"
-        animation="property: position; from: 0 0.52 0; to: 0 0.92 0; dur: 800; dir: alternate; loop: true; easing: easeOutBounce">
-      </a-sphere>
+    <!-- Goldfisch -->
+    <a-entity position="0 2.5 0">
+        <a-gltf-model src="#goldfish"
+                      scale="0.003 0.003 0.003"
+                      rotation="0 0 0">
+        </a-gltf-model>
+    </a-entity>
 
-      <!-- Seerosenblätter -->
-      <a-circle position="-0.55 0.02 0.3" radius="0.2" color="#4caf50" opacity="0.8" rotation="-90 0 30"></a-circle>
-      <a-circle position="0.5 0.02 -0.3" radius="0.15" color="#388e3c" opacity="0.8" rotation="-90 0 -20"></a-circle>
+    <!-- Blaue Fische -->
+    <a-entity position="-3 3 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
 
-      <!-- Schwebender Text -->
-      <a-text
-        value="Wie viele Frösche\nsind im Teich?"
-        position="0 1.5 0" align="center" color="#e3f2fd" width="3"
-        animation="property: position; to: 0 1.8 0; dur: 1500; dir: alternate; loop: true; easing: easeInOutSine"
-      ></a-text>
+    <a-entity position="-1.5 4.5 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
 
-    </a-marker>
+    <a-entity position="1.5 4.5 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
 
-    <a-entity camera></a-entity>
-  </a-scene>
+    <a-entity position="3 3 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
 
-  <div id="marker-hint">📋 Halte die Kamera auf<br><strong>Marker 2 (KANJI)</strong></div>
+    <a-entity position="-2 1 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
 
-  <div id="ui-overlay">
+    <a-entity position="2 1 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
+
+    <a-entity position="-3 -1 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
+
+    <a-entity position="0 -2 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
+
+    <a-entity position="3 -1 0">
+        <a-gltf-model src="#bluefish" scale="0.003 0.003 0.003"></a-gltf-model>
+    </a-entity>
+
+</a-entity>
+
+<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+</a-scene>
+
+<div id="marker-hint">
+🐟 Halte die Kamera auf das Fischbild
+</div>
+
+<div id="ui-overlay">
     <div id="header">
-      <h1>🐸 Posten 2 – Der Teich</h1>
-      <p>Schau durch die Kamera auf den Marker!</p>
+        <h1>🌊 Posten 2 – Der See</h1>
+        <p>Finde den besonderen Fisch</p>
     </div>
-  </div>
+</div>
 
-  <div id="raetsel-box">
-    <h2>🐸 Rätsel:</h2>
-    <p>Zähle alle Frösche im Teich!<br>Einer springt — kannst du ihn trotzdem zählen?</p>
-    <div class="answer-grid">
-      <button class="answer-btn" onclick="checkAnswer(this, false)">1 Frosch</button>
-      <button class="answer-btn" onclick="checkAnswer(this, false)">2 Frösche</button>
-      <button class="answer-btn" onclick="checkAnswer(this, true)">3 Frösche</button>
-      <button class="answer-btn" onclick="checkAnswer(this, false)">4 Frösche</button>
+<div id="raetsel-box">
+    <h2>🐟 Rätsel</h2>
+
+    <p>
+        Schau genau ins Wasser!<br>
+        Welche Farbe hat der besondere Fisch?
+    </p>
+
+    <div style="display:flex; gap:10px;">
+        <input
+            id="answerInput"
+            type="text"
+            placeholder="Farbe eingeben"
+            style="
+                flex:1;
+                padding:12px;
+                font-size:1rem;
+                border-radius:12px;
+                border:2px solid #ccc;
+            ">
+
+        <button
+            id="okButton"
+            class="answer-btn"
+            onclick="checkAnswer()">
+            OK
+        </button>
     </div>
-  </div>
+</div>
 
-  <div id="feedback">
+<div id="feedback">
     <div class="emoji" id="feedback-emoji">🎉</div>
-    <h2 id="feedback-title">Richtig!</h2>
-    <p id="feedback-text">Super gemacht!</p>
-    <button onclick="hideFeedback()">Weiter ➡️</button>
-  </div>
+    <h2 id="feedback-title"></h2>
+    <p id="feedback-text"></p>
+    <button onclick="hideFeedback()">Weiter</button>
+</div>
 
-  <script>
-    const marker = document.querySelector('#marker2');
-    const hint = document.querySelector('#marker-hint');
-    marker.addEventListener('markerFound', () => hint.style.display = 'none');
-    marker.addEventListener('markerLost', () => hint.style.display = 'block');
+<script>
 
-    function checkAnswer(btn, correct) {
-      const feedback = document.getElementById('feedback');
-      if (correct) {
+const marker = document.querySelector('#marker1');
+const hint = document.querySelector('#marker-hint');
+
+marker.addEventListener("targetFound", () => {
+    hint.remove();
+}, { once: true });
+
+function checkAnswer() {
+
+    const value =
+        document.getElementById('answerInput')
+        .value
+        .trim()
+        .toLowerCase();
+
+    const feedback = document.getElementById('feedback');
+
+    if (!value) {
+
+        document.getElementById('feedback-emoji').textContent = '🤔';
+        document.getElementById('feedback-title').textContent = 'Keine Antwort';
+        document.getElementById('feedback-text').textContent =
+            'Bitte gib eine Farbe ein.';
+
+        feedback.classList.add('show');
+        return;
+    }
+
+    if (
+        value === 'gold' ||
+        value === 'golden' ||
+        value === 'gelb'
+    ) {
+
+        document.getElementById('answerInput').disabled = true;
+        document.getElementById('okButton').disabled = true;
+
         document.getElementById('feedback-emoji').textContent = '🎉';
         document.getElementById('feedback-title').textContent = 'Richtig!';
         document.getElementById('feedback-text').textContent =
-          '3 Frösche – einer davon hüpft sogar! Gut gezählt!\n\nHinweis für Posten 3: Sucht den Marker bei der Parkbank!';
-        feedback.style.background = 'rgba(1,87,155,0.85)';
-      } else {
-        document.getElementById('feedback-emoji').textContent = '🙈';
-        document.getElementById('feedback-title').textContent = 'Nochmal schauen!';
-        document.getElementById('feedback-text').textContent = 'Zählt nochmal alle Frösche – auch der hüpfende zählt!';
-        feedback.style.background = 'rgba(183,28,28,0.85)';
-        btn.classList.add('wrong');
-        setTimeout(() => btn.classList.remove('wrong'), 800);
-        return;
-      }
-      feedback.classList.add('show');
-    }
+            'Super! Du hast den besonderen Goldfisch gefunden. Folge nun dem Weg bis zur grossen Wurzel.';
 
-    function hideFeedback() { document.getElementById('feedback').classList.remove('show'); }
-  </script>
+        feedback.classList.add('show');
+    }
+    else {
+
+        document.getElementById('feedback-emoji').textContent = '🤔';
+        document.getElementById('feedback-title').textContent =
+            'Leider nicht ganz richtig';
+
+        document.getElementById('feedback-text').textContent =
+            'Schau dir die Fische nochmals genau an.';
+
+        feedback.classList.add('show');
+    }
+}
+
+function hideFeedback() {
+    document.getElementById('feedback').classList.remove('show');
+}
+
+document
+    .getElementById('answerInput')
+    .addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            checkAnswer();
+        }
+    });
+
+</script>
+
 </body>
 </html>
