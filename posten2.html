@@ -133,7 +133,7 @@ html, body {
 <body>
 
 <a-scene
-    mindar-image="imageTargetSrc: goldfishTarget.mind;"
+    mindar-image="imageTargetSrc: eichhoernchenTarget.mind;"
     color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights"
     vr-mode-ui="enabled: false"
@@ -143,9 +143,6 @@ html, body {
 <a-assets>
     <a-asset-item id="goldfish" src="goldfish.glb"></a-asset-item>
     <a-asset-item id="bluefish" src="bluegoldfish.glb"></a-asset-item>
-      <a-asset-item id="squirrel"
-        src="Squirrel.glb">
-    </a-asset-item>
 </a-assets>
 
 <a-light type="ambient" intensity="1"></a-light>
@@ -154,37 +151,16 @@ html, body {
 <a-entity id="marker1" mindar-image-target="targetIndex: 0">
 
     <!-- Goldfisch -->
-<a-entity position="0 0.01 0">
+      <a-entity position="0 1.5 0">
+        <a-gltf-model src="#goldfish" scale="0.05 0.05 0.05" rotation="0 90 0"  animation-mixer="clip: Fish_Armature|Swimming_Normal"></a-gltf-model>
+    </a-entity>
 
-    <a-gltf-model
-        src="#goldfish"
-        scale="0.0002 0.0002 0.0002"
-        rotation="0 0 0"
-          animation-mixer="clip: Swimming_Normal">
-    </a-gltf-model>
-
-</a-entity>
-
-      <a-entity position="0 0.01 0">
-
-    <a-box color="red"
-           position="2 0 0"
-           width="0.2"
-           height="0.2"
-           depth="0.2">
-    </a-box>
-
-</a-entity>
- 
     <!-- Blaue Fische -->
     <a-entity position="0 0.1 0">
         <a-gltf-model src="#bluefish" scale="0.05 0.05 0.05" rotation="0 35 0"  animation-mixer="clip: Fish_Armature|Swimming_Normal"></a-gltf-model>
     </a-entity>
  <a-entity position="0 0.5 0">
         <a-gltf-model src="#bluefish" scale="0.05 0.05 0.05" rotation="0 180 0"  animation-mixer="clip: Fish_Armature|Swimming_Normal"></a-gltf-model>
-    </a-entity>
-     <a-entity position="0 1.5 0">
-        <a-gltf-model src="#goldfish" scale="0.05 0.05 0.05" rotation="0 90 0"  animation-mixer="clip: Fish_Armature|Swimming_Normal"></a-gltf-model>
     </a-entity>
 
     <a-entity position="1.5 4.5 0">
