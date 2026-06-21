@@ -143,6 +143,9 @@ html, body {
 <a-assets>
     <a-asset-item id="goldfish" src="goldfish.glb"></a-asset-item>
     <a-asset-item id="bluefish" src="bluegoldfish.glb"></a-asset-item>
+      <a-asset-item id="squirrel"
+        src="Squirrel.glb">
+    </a-asset-item>
 </a-assets>
 
 <a-light type="ambient" intensity="1"></a-light>
@@ -180,7 +183,10 @@ html, body {
     </a-box>
 
 </a-entity>
-
+ <!-- baumstamm unten -->
+    <a-entity position="0 1.5 0">
+        <a-gltf-model src="#squirrel" scale="0.003 0.003 0.003" rotation="0 35 0"></a-gltf-model>
+    </a-entity>
     <!-- Blaue Fische -->
     <a-entity position="2.0 0 0">
         <a-gltf-model src="#bluefish" scale="0.0003 0.0003 0.0003"></a-gltf-model>
